@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Rejestracja</h1>
+<form method ="POST" action="">
+    {%csrf_token%}
+    <h2>Dane konta:</h2><hr>
+    {{userform.as_p}}
+    <h2>Dane osobowe</h2><hr>
+    {{usercdform.as_p}}
+    <h2>Dane adresowe</h2><hr>
+    {{address.as_p}}
+    <input type="submit">
+</form>
+
+
+</body>
+</html>
