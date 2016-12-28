@@ -20,7 +20,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+<<<<<<< HEAD
 SECRET_KEY = '3)es1##%p5+s(3a33cq_sjv1t=@(06+nzo^zwy=t9$qpe03lq8'
+=======
+SECRET_KEY = 'sgs1afp4m#enah6j7j+egg8yo$_rk8-j(mjvf1#(as2eb#pznm'
+>>>>>>> origin
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,8 +41,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+<<<<<<< HEAD
     'polls',
     'account'
+=======
+>>>>>>> origin
 ]
 
 MIDDLEWARE = [
@@ -56,7 +63,11 @@ ROOT_URLCONF = 'sklep.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+<<<<<<< HEAD
         'DIRS': ['account/templates'],
+=======
+        'DIRS': [],
+>>>>>>> origin
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -78,10 +89,17 @@ WSGI_APPLICATION = 'sklep.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
+<<<<<<< HEAD
         'NAME' : 'sklep',
         'USER' : 'django',
         'PASSWORD' : '1234',
         'HOST': '127.0.0.1',
+=======
+        'NAME': 'sklep',
+        'USER': 'django',
+        'PASSWORD': '1234',
+        'HOST': 'localhost',
+>>>>>>> origin
         'PORT': '3306',
     }
 }
