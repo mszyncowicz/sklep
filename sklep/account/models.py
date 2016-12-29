@@ -2,15 +2,16 @@
 from __future__ import unicode_literals
 
 from django.db import models
-
+from django.contrib.auth.models import AbstractUser
 # Create your models here.
 
-class User(models.Model):
-    login = models.CharField(max_length=17, unique=True)
-    password = models.CharField(max_length= 17)
+class User(AbstractUser):
+    username = models.CharField(max_length=17, unique=True, validators=[AbstractUser.username_validator])
     email = models.EmailField('e-mail',max_length = 255, unique=True)
+    first_name = None
+    last_name = None
     def __str__(self):
-        return self.login;
+        return self.username;
 
 class Address (models.Model):
     city = models.CharField('miasto', max_length = 50)
