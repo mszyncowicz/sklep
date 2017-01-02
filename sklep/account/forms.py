@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from django import forms
+from django.contrib.auth.models import UserManager
 import datetime
 
 from django.db import models
@@ -14,7 +15,7 @@ class UserForm (forms.ModelForm):
     password2 = forms.CharField(label=(u"Potewierdź hasło"),widget=forms.PasswordInput(), help_text=(u"Wpisz to samo hasło co powyżej w celu weryfikacji"))
     class Meta:
         model = User
-        exclude = ['password']
+        exclude = ['password','is_staff','is_active','date_joined','is_superuser','groups','user_permissions','last_login']
     def clean_password2(self):
         password1 = self.cleaned_data.get("password1")
         password2 = self.cleaned_data.get("password2")
@@ -25,11 +26,8 @@ class UserForm (forms.ModelForm):
             )
         return password2
 
-    def save(self, commit=True):
-        user = super(UserForm, self).save(commit=False)
-        user.password = self.cleaned_data["password1"]
-        if commit:
-            user.save()
+    def save(self):
+        user = User.objects.create_user(username = self.cleaned_data["username"], email = self.cleaned_data["email"], password = self.cleaned_data["password1"])
         return user
 
 class UserCdForm(forms.ModelForm):

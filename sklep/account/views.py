@@ -1,14 +1,12 @@
 from django.shortcuts import render,render_to_response
 
 from django.http import HttpResponse
-
-from django.template import loader, RequestContext
-
+from .models import User
+from django.contrib.auth import authenticate, login
 from .forms import UserCdForm,UserForm,AddressForm
 # Create your views here.
 
 def register(request):
-    template = loader.get_template('account/register.html')
     if request.method == 'POST':
         uf = UserForm(request.POST, prefix='user')
         ucf = UserCdForm(request.POST, prefix='usercd')
@@ -20,7 +18,7 @@ def register(request):
             usercd.user = user
             usercd.address = address
             usercd.save()
-            return HttpResponse('account created')
+            return HttpResponse('Acount created, <a href="index.html">go back</a>')
     else:
         uf = UserForm(prefix='user')
         ucf = UserCdForm(prefix='usercd')
@@ -31,3 +29,17 @@ def register(request):
                        usercdform=ucf,
                        address = af),
                   )
+def user_login(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return HttpResponse("Logged in")
+        else:
+            return HttpResponse("Wrong login or passowrd.")
+    else:
+        return render(request, 'base.html',{})
+
+
