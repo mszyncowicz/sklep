@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Rejestracja</h1>
+<form method ="POST" action="">
+    {%csrf_token%}
+    <h2>Dane konta:</h2><hr>
+    {{userform.as_p}}
+    <h2>Dane osobowe</h2><hr>
+    {{usercdform.as_p}}
+    <h2>Dane adresowe</h2><hr>
+    {{address.as_p}}
+    <input class ="btn btn-primary"type="submit" value ="Zarejestruj">
+</form>
+{% endblock %}
