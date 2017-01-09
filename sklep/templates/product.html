@@ -1,0 +1,22 @@
+{% extends 'index.html' %}
+{% block content %}
+<h2>{{product.nazwa}}</h2>
+<img source ="{{ galeria[0}.obraz.url }}"/>
+<table class = "table">
+    <tbody>
+        <tr>
+            <td><b>Opis: </b> </td>
+            <td class="col-md-2">{{product.opis}}</td>
+        </tr>
+        <tr>
+            <td><b>Producent: </b> </td>
+            <td class="span3">{{producent.nazwa}}</td>
+        </tr>
+        <tr>
+            <td><b>Ilość sztuk: </b> </td>
+            <td class="span3">{{product.iloscSztuk}}</td>
+        </tr>
+    </tbody>
+
+</table>
+{% endblock %}

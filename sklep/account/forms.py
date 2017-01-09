@@ -43,7 +43,7 @@ class UserCdForm(forms.ModelForm):
         now = datetime.datetime.now()
         birth = self.cleaned_data.get('birth')
 
-        if now and birth and now.year - birth.year < 18 or now.year - birth.year >= 18 and now.month - birth.month < 0:
+        if now and birth and now.year - birth.year < 18 or now.year - birth.year <= 18 and now.month - birth.month < 0:
             raise forms.ValidationError(
                 self.error_messages['too_young'],
                 code='too_young',
@@ -61,3 +61,4 @@ class AddressForm(forms.ModelForm):
     class Meta:
         model = Address
         exclude = []
+

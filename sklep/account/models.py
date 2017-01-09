@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from product.models import ToSell
 # Create your models here.
 
 class User(AbstractUser):
@@ -27,3 +28,10 @@ class UserCd(models.Model):
     address = models.OneToOneField(Address, on_delete=models.CASCADE)
 
 
+
+class Koszyk(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+
+class Zamowienie(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)

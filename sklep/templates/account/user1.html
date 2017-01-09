@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block menu %}
+<div class="col-md-2">
+</div>
+{% endblock %}
+{% block content %}
+<h1>Twój profil</h1>
+<h3>Dane osobowe:</h3><hr>
+<table class = "table">
+    <tbody>
+        <tr>
+            <td><b>Imię: </b> </td>
+            <td class="col-md-2">{{usercd.fName}}</td>
+        </tr>
+        <tr>
+            <td><b>Nazwisko: </b> </td>
+            <td class="span3">{{usercd.lName}}</td>
+        </tr>
+        <tr>
+            <td><b>Wiek: </b> </td>
+            <td class="span3">{{age}}</td>
+        </tr>
+     <tr>
+            <td><b>Telefon: </b> </td>
+            <td class="span3">{{usercd.phone}}</td>
+        </tr>
+       <tr>
+            <td><b>E-mail: </b> </td>
+            <td class="span3">{{user.email}}</td>
+        </tr>
+    </tbody>
+
+</table>
+<hr>
+<p>Dane są nieaktualne? <a class = "btn btn-primary" href ="{% url 'user_update' %}">Aktualizuj</a></p>
+<h3>Dane adresowe:</h3><hr>
+
+<table class = "table">
+    <tbody>
+        <tr>
+            <td><b>Adres: </b> </td>
+            <td class="col-md-2">{{address.address}}</td>
+        </tr>
+        <tr>
+            <td><b>Miasto: </b> </td>
+            <td class="col-md-2">{{address.city}}</td>
+        </tr>
+        <tr>
+            <td><b>Poczta: </b> </td>
+            <td class="col-md-2">{{address.zipcode}}</td>
+        </tr>
+    </tbody>
+
+</table>
+<hr>
+<p>Dane są nieaktualne? <a class = "btn btn-primary" href ="{% url 'address_update' %}">Aktualizuj</a><a class = "btn btn-primary" href ="{% url 'password_update' %}">Zmień hasło</a></p>
+{% endblock %}

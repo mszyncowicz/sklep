@@ -18,14 +18,21 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth import views
-from account.views import register,user_login
+from account.views import register,user_login,user_data,UserCdUpdate,UserUpdate,AddressUpdate
 from home.views import index
 from django.contrib.auth.views import logout
+from product.views import product,pro
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^register/', register, name = 'register'),
     url(r'^login/', user_login, name='login'),
-    url(r'^', index, name = 'index')
+    url(r'^user/dataupdate/', UserCdUpdate.as_view(), name='user_update'),
+    url(r'^user/addressupdate/', AddressUpdate.as_view(), name='address_update'),
+    url(r'^user/pasupdate/', UserUpdate.as_view(), name='password_update'),
+    url(r'^product/(?P<product_id>[0-9]+)/$', pro, name = 'product' ),
+    url(r'^user/', user_data, name='user'),
+
+    url(r'^', index, name = 'index'),
 
 ]
 
