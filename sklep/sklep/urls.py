@@ -29,7 +29,7 @@ urlpatterns = [
     url(r'^user/dataupdate/', UserCdUpdate.as_view(), name='user_update'),
     url(r'^user/addressupdate/', AddressUpdate.as_view(), name='address_update'),
     url(r'^user/pasupdate/', UserUpdate.as_view(), name='password_update'),
-    url(r'^product/(?P<product_id>[0-9]+)/$', pro, name = 'product' ),
+    url(r'^product/(?P<product_id>[0-9]+)/$', product, name = 'product' ),
     url(r'^user/', user_data, name='user'),
 
     url(r'^', index, name = 'index'),
