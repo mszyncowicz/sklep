@@ -12,7 +12,3 @@ def product(request, product_id):
         return render(request, 'index.html')
     return render(request, 'product.html',{'product': product_object, 'producent': producent_object,'galeria': galeria_objects})
 
-
-def pro(request,product_id):
-    print 'bla'
-    return HttpResponse( product_id)

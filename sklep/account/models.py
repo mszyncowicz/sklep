@@ -27,11 +27,16 @@ class UserCd(models.Model):
     phone = models.CharField('nr.telefonu',max_length=12)
     address = models.OneToOneField(Address, on_delete=models.CASCADE)
 
-
+class Pracownik(models.Model):
+    user = models.OneToOneField(User, primary_key=True)
 
 class Koszyk(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
 
 class Zamowienie(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User)
+    # status : #1 - Złożono zamówienie, #2 - Przyjęto zamówienie, #3 - Zrealizowano
+    status = models.IntegerField('Obecny status')
+    #ostatnia data zmiany statusu
+    statustime = models.DateTimeField('Czas zmiany')

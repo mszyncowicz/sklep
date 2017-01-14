@@ -14,7 +14,9 @@ class Produkt (models.Model):
     nazwa = models.CharField(max_length=255, unique = True)
     opis = models.CharField(max_length=600)
     producent = models.ForeignKey(Producent)
-    iloscSztuk = models.IntegerField(default = 0, max_length=2000)
+    cena = models.FloatField(default=0)
+    iloscSztuk = models.IntegerField(default = 0)
+    category = models.IntegerField(default = 0)
 
     def __unicode__(self):
         return self.nazwa
@@ -23,6 +25,22 @@ class Galeria (models.Model):
     produkt = models.ForeignKey(Produkt)
     def __unicode__(self):
         return 'obraz ' + self.produkt.nazwa
+
+class KartaGraficzna(models.Model):
+    produkt = models.OneToOneField(Produkt, primary_key=True)
+    wyjscia = models.CharField(max_length=255)
+    zlacze = models.CharField(max_length=255)
+    TDP = models.CharField(max_length=255)
+
+class Procesor(models.Model):
+    produkt = models.OneToOneField(Produkt, primary_key=True)
+    socket = models.CharField(max_length=255)
+    TDP = models.CharField(max_length=255)
+
+class PlytaGlowna(models.Model):
+    produkt = models.OneToOneField(Produkt, primary_key=True)
+    sockety = models.CharField(max_length=255)
+    wyjscia = models.CharField(max_length=255)
 
 # zamowienie nie może wykorzystywać on Delete, ponieważ usunie to pewna ilosc sztuk towaru bezpowrotnie
 class ToSell (models.Model):

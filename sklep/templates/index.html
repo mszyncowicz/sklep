@@ -23,3 +23,14 @@
 </div><!--/.well -->
 </div>
 {% endblock %}
+{% block content %}
+<table class = "table">
+  <tbody>
+  <tr><th>nazwa</th><th>producent</th><th>cena</th></tr>
+    {% for p in lista %}
+  <tr><td><a href="/product/{{p.id}}/">{{ p.nazwa }}</a></td><td>{{p.producent}}</td><td>{{p.cena}}</td></tr>
+    {% endfor %}
+  </tbody>
+
+</table>
+{% endblock %}

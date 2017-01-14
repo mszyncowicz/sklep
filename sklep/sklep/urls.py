@@ -21,7 +21,7 @@ from django.contrib.auth import views
 from account.views import register,user_login,user_data,UserCdUpdate,UserUpdate,AddressUpdate
 from home.views import index
 from django.contrib.auth.views import logout
-from product.views import product,pro
+from product.views import product
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^register/', register, name = 'register'),
