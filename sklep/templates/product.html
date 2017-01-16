@@ -1,9 +1,9 @@
 {% extends 'index.html' %}
 {% block content %}
 <img src ="{{galeria.0.obraz.url}}" class="img-thumbnail">
-
 <h2>{{product.nazwa}}</h2>
 <table class = "table">
+
     <tbody>
         <tr>
             <td><b>Opis: </b> </td>
@@ -13,11 +13,23 @@
             <td><b>Producent: </b> </td>
             <td class="span3">{{producent.nazwa}}</td>
         </tr>
+        {% block tbody %}
+        {% endblock %}
         <tr>
+
             <td><b>Ilość sztuk: </b> </td>
             <td class="span3">{{product.iloscSztuk}}</td>
         </tr>
     </tbody>
 
 </table>
+{% if product.iloscSztuk > 0 %}
+<form method="POST" action="">
+    {% csrf_token %}
+    <input type="number" name="ilosc" min="1" max="{{product.iloscSztuk}}" value="1" >
+    <input class ="btn btn-primary" type="submit" value ="Kup to!">
+</form>
+{% else %}
+<p>Brak towaru</p>
+{% endif %}
 {% endblock %}

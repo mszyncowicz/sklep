@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate, login
 from .models import UserCd,Address
 from .forms import UserCdForm,UserForm,AddressForm
 from django.views.generic.edit import UpdateView, CreateView, FormMixin
+from django.db import transaction
 # Create your views here.
 import datetime
 
@@ -15,17 +16,18 @@ def register(request):
         ucf = UserCdForm(request.POST, prefix='usercd')
         af = AddressForm(request.POST, prefix='address')
         if uf.is_valid() * ucf.is_valid() * af.is_valid():
-            user = uf.save()
-            address = af.save()
-            usercd = ucf.save(commit=False)
-            usercd.user = user
-            usercd.address = address
-            usercd.save()
+            with transaction.atomic():
+              user = uf.save()
+              address = af.save()
+              usercd = ucf.save(commit=False)
+              usercd.user = user
+              usercd.address = address
+              usercd.save()
             return HttpResponse('Acount created, <a href="index.html">go back</a>')
     else:
         uf = UserForm(prefix='user')
         ucf = UserCdForm(prefix='usercd')
-        af = AddressForm(prefix='adresss')
+        af = AddressForm(prefix='address')
     return render(request,
                   'account/register.html',
                   dict(userform=uf,
@@ -39,6 +41,9 @@ def user_login(request):
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
+            if 'koszyk' not in request.session:
+                 request.session['koszyk']=[]
+                 request.session['koszyklen'] = len(request.session['koszyk'])
             return HttpResponse("Logged in")
         else:
             return HttpResponse("Wrong login or passowrd.")

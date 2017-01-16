@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block menu %}
+<div class="col-md-2">
+</div>
+{% endblock %}
+{% block content %}
+{% if request.session.koszyklen > 0 %}
+<h2>Twoje zamówienie:</h2><hr>
+<table class = "table">
+  <tbody>
+  <tr><th>nazwa</th><th>producent</th><th>ilość</th><th>cena</th></tr>
+    {% for p in dic %}
+  <tr><td><a href="/product/{{p.0}}/">{{ p.1 }}</a></td><td>{{p.2}}</td><td>{{p.3}}</td><td>{{p.4}}</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+<p>Suma: {{sum}} PLN</p>
+<br>
+<p>Jesteś pewien? </p>
+<form method="POST" action="">
+    {% csrf_token %}
+     <input class ="btn btn-primary" type="submit" value ="Tak, złóż zamówienie">
+</form>
+{% else %}
+<p>Nic tu nie ma</p>
+{% endif %}
+{% endblock %}

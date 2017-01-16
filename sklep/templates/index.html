@@ -1,25 +1,68 @@
 {% extends 'base.html' %}
 {% block menu %}
+
+
+
 <div class="col-md-2">
 <div class="well sidebar-nav">
             <ul class="nav nav-list">
-              <li class="nav-header collapse in">Sidebar</li>
-              <li class="active"><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li class="nav-header">Sidebar</li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li class="nav-header">Sidebar</li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-            </ul>
+
+
+
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" href="#collapse1">Procesory</a>
+        </h4>
+      </div>
+              {% if request.GET.cat == "procesory" %}
+      <div id="collapse1" class="panel-collapse">
+        {% else %}
+        <div id="collapse1" class="panel-collapse collapse">
+          {% endif %}
+        <ul class="list-group">
+          {% for p in procesory %}
+              <li class="list-group-item"><a href="?cat=procesory&producent={{p.nazwa}}">{{p.nazwa}}</a></li>
+          {% endfor %}
+        </ul>
+
+
+  </div>
+  <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" href="#collapse2">Karty graficzne</a>
+        </h4>
+      </div>
+              {% if request.GET.cat == "karty" %}
+      <div id="collapse2" class="panel-collapse">
+        {% else %}
+        <div id="collapse2" class="panel-collapse collapse">
+          {% endif %}
+        <ul class="list-group">
+          {% for p in karty %}
+               <li class="list-group-item"><a href="?cat=karty&producent={{p.nazwa}}">{{p.nazwa}}</a></li>
+          {% endfor %}
+        </ul>
+
+
+  </div>
+                <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" href="#collapse3">Płyty główne</a>
+        </h4>
+      </div>
+                 {% if request.GET.cat == "plyty" %}
+      <div id="collapse3" class="panel-collapse">
+        {% else %}
+        <div id="collapse3" class="panel-collapse collapse">
+          {% endif %}
+        <ul class="list-group">
+          {% for p in plyty %}
+          <li class="list-group-item"><a href="?cat=plyty&producent={{p.nazwa}}">{{p.nazwa}}</a></li>
+          {% endfor %}
+        </ul>
+
+
+  </div>
 </div><!--/.well -->
 </div>
 {% endblock %}
@@ -27,9 +70,23 @@
 <table class = "table">
   <tbody>
   <tr><th>nazwa</th><th>producent</th><th>cena</th></tr>
+  {% if request.GET.cat == "procesory" %}
+      {% for p in lista %}
+  <tr><td><a href="/product/{{p.3}}/1/">{{ p.0 }}</a></td><td>{{p.1}}</td><td>{{p.2}}</td></tr>
+    {% endfor %}
+   {% elif request.GET.cat == "karty" %}
+      {% for p in lista %}
+  <tr><td><a href="/product/{{p.3}}/2/">{{ p.0 }}</a></td><td>{{p.1}}</td><td>{{p.2}}</td></tr>
+    {% endfor %}
+   {% elif request.GET.cat == "plyty" %}
+      {% for p in lista %}
+  <tr><td><a href="/product/{{p.3}}/3/">{{ p.0 }}</a></td><td>{{p.1}}</td><td>{{p.2}}</td></tr>
+    {% endfor %}
+  {% else %}
     {% for p in lista %}
   <tr><td><a href="/product/{{p.id}}/">{{ p.nazwa }}</a></td><td>{{p.producent}}</td><td>{{p.cena}}</td></tr>
     {% endfor %}
+  {% endif %}
   </tbody>
 
 </table>

@@ -39,4 +39,7 @@ class Zamowienie(models.Model):
     # status : #1 - Złożono zamówienie, #2 - Przyjęto zamówienie, #3 - Zrealizowano
     status = models.IntegerField('Obecny status')
     #ostatnia data zmiany statusu
-    statustime = models.DateTimeField('Czas zmiany')
+    statustime = models.DateTimeField('Czas zmiany',default=None)
+
+    class Meta:
+        get_latest_by = 'statustime'

@@ -21,15 +21,19 @@ from django.contrib.auth import views
 from account.views import register,user_login,user_data,UserCdUpdate,UserUpdate,AddressUpdate
 from home.views import index
 from django.contrib.auth.views import logout
-from product.views import product
+from product.views import product, category, basket, zamow, zamowienia
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^register/', register, name = 'register'),
     url(r'^login/', user_login, name='login'),
+    url(r'^koszyk/zamow/', zamow, name='basket3'),
+    url(r'^koszyk/', basket , name ='basket'),
+    url(r'^zamowienia/', zamowienia , name ='basket2'),
     url(r'^user/dataupdate/', UserCdUpdate.as_view(), name='user_update'),
     url(r'^user/addressupdate/', AddressUpdate.as_view(), name='address_update'),
     url(r'^user/pasupdate/', UserUpdate.as_view(), name='password_update'),
     url(r'^product/(?P<product_id>[0-9]+)/$', product, name = 'product' ),
+    url(r'^product/(?P<product_id>[0-9]+)/(?P<cat_id>[0-9])/$', category, name='product'),
     url(r'^user/', user_data, name='user'),
 
     url(r'^', index, name = 'index'),

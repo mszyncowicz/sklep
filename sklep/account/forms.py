@@ -34,7 +34,7 @@ class UserCdForm(forms.ModelForm):
     error_messages = {
         'too_young': (u"Jesteś za młody na zabawę w sklep")
     }
-    birth = forms.DateField(label=(u"Data urodzenia"),widget=forms.SelectDateWidget(years = range(1900,2016)))
+    birth = forms.DateField(label=(u"Data urodzenia"), widget=forms.SelectDateWidget(years = range(1900,datetime.date.today().year+1)),initial = datetime.date.today,)
     class Meta:
         model = UserCd
         exclude = ['user','address','birthDate']

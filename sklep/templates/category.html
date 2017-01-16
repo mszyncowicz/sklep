@@ -1,0 +1,38 @@
+{% extends 'product.html' %}
+
+{% block tbody %}
+{% if category == 1 %}
+        <tr>
+            <td><b>Socket: </b> </td>
+            <td class="col-md-2">{{cat.socket}}</td>
+        </tr>
+        <tr>
+            <td><b>TDP: </b> </td>
+            <td class="col-md-2">{{cat.TDP}}</td>
+        </tr>
+{% elif category == 2 %}
+        <tr>
+            <td><b>Wyjścia: </b> </td>
+            <td class="col-md-2">{{cat.wyjscia}}</td>
+        </tr>
+        <tr>
+            <td><b>Złącze: </b> </td>
+            <td class="col-md-2">{{cat.zlacze}}</td>
+        </tr>
+        <tr>
+            <td><b>TDP: </b> </td>
+            <td class="col-md-2">{{cat.TDP}}</td>
+        </tr>
+{% elif category == 3 %}
+        <tr>
+            <td><b>Wyjścia: </b> </td>
+            <td class="col-md-2">{{cat.wyjscia}}</td>
+        </tr>
+        <tr>
+            <td><b>Złącza: </b> </td>
+            <td class="col-md-2">{{cat.sockety}}</td>
+        </tr>
+{% endif %}
+
+
+{% endblock %}

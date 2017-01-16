@@ -7,8 +7,9 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
 
+    <link rel="icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
     <title>Jumbotron Template for Bootstrap</title>
 
     <!-- Bootstrap core CSS -->
@@ -61,6 +62,11 @@
           <div class="form-group">
             <a href="/?logout=1" class ="btn btn-default navbar-form navbar-right">Wyloguj</a>
             <a href="/user/" class ="btn btn-success navbar-form navbar-right">Ja</a>
+            <a href="/zamowienia/" class ="btn btn-success navbar-form navbar-right">Moje zamowienia</a>
+            {% if 'koszyk' in request.session %}
+            <a href="/koszyk/" class ="btn btn-success navbar-form navbar-right">Koszyk({{ request.session.koszyklen }})</a>
+            {% endif %}
+
             </div>
           {% endif %}
         </div><!--/.navbar-collapse -->

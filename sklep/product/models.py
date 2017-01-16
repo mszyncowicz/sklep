@@ -14,10 +14,8 @@ class Produkt (models.Model):
     nazwa = models.CharField(max_length=255, unique = True)
     opis = models.CharField(max_length=600)
     producent = models.ForeignKey(Producent)
-    cena = models.FloatField(default=0)
     iloscSztuk = models.IntegerField(default = 0)
-    category = models.IntegerField(default = 0)
-
+    cena = models.FloatField(default = 99999)
     def __unicode__(self):
         return self.nazwa
 class Galeria (models.Model):
@@ -42,8 +40,9 @@ class PlytaGlowna(models.Model):
     sockety = models.CharField(max_length=255)
     wyjscia = models.CharField(max_length=255)
 
-# zamowienie nie może wykorzystywać on Delete, ponieważ usunie to pewna ilosc sztuk towaru bezpowrotnie
+# zamowienie nie może wykorzystywać on Delete cascade, ponieważ usunie to pewna ilosc sztuk towaru bezpowrotnie
+#trzeba uzyc funkcji!!!!!!
 class ToSell (models.Model):
     produkt = models.ForeignKey(Produkt)
     iloscSztuk = models.IntegerField()
-    zamowienie = models.OneToOneField('account.Zamowienie', default=None)
+    zamowienie = models.ForeignKey('account.Zamowienie', default=None)
