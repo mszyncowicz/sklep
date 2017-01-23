@@ -10,12 +10,25 @@ class Producent (models.Model):
 
     def __unicode__(self):
         return self.nazwa
+class Kategoria(models.Model):
+    liczba = models.IntegerField()
+    def __unicode__(self):
+        if self.liczba == 1:
+            return 'Procesor'
+        elif self.liczba == 2:
+            return 'Karta graficzna'
+        elif self.liczba == 3:
+            return 'Plyta glowna'
+        else:
+            return 'Inne'
+
 class Produkt (models.Model):
     nazwa = models.CharField(max_length=255, unique = True)
     opis = models.CharField(max_length=600)
     producent = models.ForeignKey(Producent)
     iloscSztuk = models.IntegerField(default = 0)
     cena = models.FloatField(default = 99999)
+    category = models.ForeignKey(Kategoria, default=None)
     def __unicode__(self):
         return self.nazwa
 class Galeria (models.Model):
@@ -23,6 +36,7 @@ class Galeria (models.Model):
     produkt = models.ForeignKey(Produkt)
     def __unicode__(self):
         return 'obraz ' + self.produkt.nazwa
+
 
 class KartaGraficzna(models.Model):
     produkt = models.OneToOneField(Produkt, primary_key=True)
@@ -45,4 +59,4 @@ class PlytaGlowna(models.Model):
 class ToSell (models.Model):
     produkt = models.ForeignKey(Produkt)
     iloscSztuk = models.IntegerField()
-    zamowienie = models.ForeignKey('account.Zamowienie', default=None)
+    zamowienie = models.ForeignKey('account.Zamowienie', default= None, on_delete=models.CASCADE)

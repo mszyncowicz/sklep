@@ -21,7 +21,7 @@ from django.contrib.auth import views
 from account.views import register,user_login,user_data,UserCdUpdate,UserUpdate,AddressUpdate
 from home.views import index
 from django.contrib.auth.views import logout
-from product.views import product, category, basket, zamow, zamowienia
+from product.views import product, category, basket, zamow, zamowienia, search
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^register/', register, name = 'register'),
@@ -35,8 +35,8 @@ urlpatterns = [
     url(r'^product/(?P<product_id>[0-9]+)/$', product, name = 'product' ),
     url(r'^product/(?P<product_id>[0-9]+)/(?P<cat_id>[0-9])/$', category, name='product'),
     url(r'^user/', user_data, name='user'),
-
-    url(r'^', index, name = 'index'),
+    url(r'^search/',search,name='search'),
+    url(r'^', index, name = 'index')
 
 ]
 

@@ -15,10 +15,14 @@
 </table>
 <p>Suma: {{sum}} PLN</p>
 <br>
+{% if not user.is_superuser %}
 <form method="POST" action="">
     {% csrf_token %}
      <input class ="btn btn-primary" type="submit" value ="Złóż zamówienie">
 </form>
+{% else %}
+<p>Chcesz kupować we własnym sklepie?</p>
+{% endif %}
 {% else %}
 <p>Nic tu nie ma</p>
 {% endif %}

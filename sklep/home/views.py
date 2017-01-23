@@ -7,8 +7,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect,HttpRequest
 from django.contrib.auth import logout
 from account.views import user_login,register
-from product.models import Produkt,Producent,Procesor,PlytaGlowna,KartaGraficzna
-
+from product.models import Produkt,Producent,Procesor,PlytaGlowna,KartaGraficzna,Kategoria
 def index(request):
     if request.user.is_authenticated:
         logUserOut(request)
@@ -17,7 +16,7 @@ def index(request):
         user_login(request)
 
     if request.user.is_authenticated:
-        procesory = Producent.objects.raw('select * from product_producent where id in (select producent_id from product_produkt where id in (select produkt_id from product_procesor)) group by nazwa') #subquery
+        procesory = Producent.objects.raw('select * from product_producent where id in (select producent_id from product_produkt where id in (select produkt_id from product_procesor)) group by nazwa') #subquery menu
         karty = Producent.objects.raw('select * from product_producent where id in (select producent_id from product_produkt where id in (select produkt_id from product_kartagraficzna)) group by nazwa')
         plyty = Producent.objects.raw('select * from product_producent where id in (select producent_id from product_produkt where id in (select produkt_id from product_plytaglowna)) group by nazwa')
         p = sqlQuery()

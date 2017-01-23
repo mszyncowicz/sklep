@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block menu %}
+<div class="col-md-2">
+</div>
+{% endblock %}
+{% block content %}
+<h2>Wyniki wyszukiwania:</h2><hr>
+<table class = "table">
+  <tbody>
+  <tr><th>nazwa</th><th>producent</th><th>ilość</th><th>cena</th></tr>
+    {% for p in wyniki %}
+  <tr><td><a href="/product/{{p.0}}/">{{ p.1 }}</a></td><td>{{p.4}}</td><td>{{p.2}}</td><td>{{p.3}}</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

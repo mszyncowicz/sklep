@@ -84,7 +84,7 @@
     {% endfor %}
   {% else %}
     {% for p in lista %}
-  <tr><td><a href="/product/{{p.id}}/">{{ p.nazwa }}</a></td><td>{{p.producent}}</td><td>{{p.cena}}</td></tr>
+  <tr><td><a href="/product/{{p.id}}/{{p.category.liczba}}/">{{ p.nazwa }}</a></td><td>{{p.producent}}</td><td>{{p.cena}}</td></tr>
     {% endfor %}
   {% endif %}
   </tbody>

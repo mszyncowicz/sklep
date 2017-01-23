@@ -31,7 +31,59 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
+  <style>
+    #search {
+    float: right;
+    margin-top: 9px;
+    width: 250px;
+}
 
+.search {
+    top: 3px;
+    padding: 5px 0;
+    width: 230px;
+    height: 30px;
+    position: relative;
+    left: 6px;
+    float: left;
+    line-height: 22px;
+}
+
+    .search input {
+        position: absolute;
+        width: 0px;
+        float: Left;
+        margin-left: 210px;
+        -webkit-transition: all 0.7s ease-in-out;
+        -moz-transition: all 0.7s ease-in-out;
+        -o-transition: all 0.7s ease-in-out;
+        transition: all 0.7s ease-in-out;
+        height: 30px;
+        line-height: 18px;
+        padding: 0 2px 0 2px;
+        border-radius:1px;
+        top:-3px;
+    }
+
+        .search:hover input, .search input:focus {
+            width: 200px;
+            margin-left: 0px;
+        }
+        .btnsearch {
+    height: 31px;
+    position: absolute;
+    right: 0;
+    top: -4px;
+    border: 0px;
+
+
+}
+ .btn {
+    height: 30px;
+    border-radius:1px;
+    padding-top: 4px;
+}
+  </style>
   <body>
 
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -43,7 +95,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="../#">SklepKomputerowy.pl</a>
+          <a class="navbar-brand" href="{% url 'index' %}">SklepKomputerowy.pl</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
 
@@ -60,14 +112,19 @@
           </form>
           {% else %}
           <div class="form-group">
-            <a href="/?logout=1" class ="btn btn-default navbar-form navbar-right">Wyloguj</a>
-            <a href="/user/" class ="btn btn-success navbar-form navbar-right">Ja</a>
-            <a href="/zamowienia/" class ="btn btn-success navbar-form navbar-right">Moje zamowienia</a>
+            <a href="/?logout=1" class ="btn btn-default navbar-right">Wyloguj</a>
+            <a href="/user/" class ="btn btn-success navbar-right">Ja</a>
+            <a href="/zamowienia/" class ="btn btn-success navbar-right">Moje zamowienia</a>
             {% if 'koszyk' in request.session %}
-            <a href="/koszyk/" class ="btn btn-success navbar-form navbar-right">Koszyk({{ request.session.koszyklen }})</a>
+            <a href="/koszyk/" class ="btn btn-success navbar-right">Koszyk({{ request.session.koszyklen }})</a>
+            <div class="search navbar-right">
+              <form class="navbar-left" action ="{% url 'search' %}" method="POST">{% csrf_token %}
+<input type="text" name="search" class="form-control input-sm navbar-right" maxlength="64" placeholder="Search" />
+ <button type="submit" class="btnsearch btn-primary ">Search</button></form>
+            </div></div>
             {% endif %}
 
-            </div>
+
           {% endif %}
         </div><!--/.navbar-collapse -->
       </div>

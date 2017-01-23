@@ -1,7 +1,57 @@
 {% extends 'base.html' %}
 {% block menu %}
 <div class="col-md-2">
+    <div class="well sidebar-nav">
+        <ul class="nav nav-list">
+
+
+
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a href="?zam=1">Zgłoszone</a>
+        </h4>
+      </div>
+            <div class="panel-heading">
+        <h4 class="panel-title">
+          <a href="?zam=2">Przyjęte</a>
+        </h4>
+      </div>
+            <div class="panel-heading">
+        <h4 class="panel-title">
+          <a href="?zam=3">Zakończone</a>
+        </h4>
+      </div>
+
+
+
+        </ul>
+    </div>
 </div>
 {% endblock %}
 {% block content %}
+<h2>Zamówienia</h2>
+{% for p in zam %}
+<div class="table-bordered">
+<table class="table">
+    <tbody>
+    <tr><th>Zamowienie id:</th><td>{{p.0}}</td></tr>
+    <tr><th>Status:</th><td>
+    {% if p.2 == 2 %}
+        Przyjęto
+    {% elif p.2 == 3 %}
+        Zakończono
+    {% else %}
+        Złożono
+    {% endif %}
+    </td></tr>
+    <tr><th>Ostatnia zmiana:</th><td>{{p.3}}</td></tr>
+    <tr><th>Zakupione produkty:</th><td>{{p.5}}</td></tr>
+    <tr><th>Do zapłaty:</th><td>{{p.4}}</td></tr>
+    {% if p.2 == 1 %}
+    <tr><th>Usuń:</th><td><a href="?usun={{p.0}}">[-]</a></td></tr>
+    {% endif %}
+    </tbody>
+</table>
+    </div>
+{% endfor %}
 {% endblock %}
