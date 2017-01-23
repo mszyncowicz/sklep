@@ -143,7 +143,7 @@ def category (request, product_id, cat_id):
         return HttpResponseRedirect('/../..')
     return render(request, 'category.html',
                   {'cat': cat_object, 'product': product_object, 'producent': producent_object, 'galeria': galeria_objects, 'category':cat_id,
-                   'procesory': procesory, 'plyty': plyty, 'karty': karty})
+                   'procesory': procesory, 'plyty': plyty, 'karty': karty,'random':randomThree()})
 
 def zamowienia(request):
     zam = 1
@@ -169,6 +169,12 @@ def search(request):
 
     else:
         return HttpResponseRedirect('../');
+def randomThree():
+    cursor = connection.cursor()
+    cursor.execute(
+        'select product_produkt.id, product_produkt.nazwa, product_kategoria.liczba, product_produkt.cena, product_galeria.obraz from product_produkt inner join product_galeria on product_produkt.id = product_galeria.produkt_id inner join product_kategoria on product_produkt.category_id = product_kategoria.id ORDER BY RAND() LIMIT 3' )
+    return cursor.fetchall();
+
 
 '''
 delimiter //

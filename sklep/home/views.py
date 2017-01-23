@@ -8,6 +8,7 @@ from django.http import HttpResponseRedirect,HttpRequest
 from django.contrib.auth import logout
 from account.views import user_login,register
 from product.models import Produkt,Producent,Procesor,PlytaGlowna,KartaGraficzna,Kategoria
+from product.views import randomThree
 def index(request):
     if request.user.is_authenticated:
         logUserOut(request)
@@ -40,7 +41,7 @@ def index(request):
                 cursor.execute('select * from procesory where producent = "%s" ' % request.GET.getlist('producent')[0])
                 p = cursor.fetchall()
         # zrobic view inner joiny
-        return render(request, 'index.html', {'lista':p,'procesory':procesory,'plyty':plyty,'karty':karty})
+        return render(request, 'index.html', {'lista':p,'procesory':procesory,'plyty':plyty,'karty':karty,'random':randomThree()})
     else: return HttpResponseRedirect('/register/')
 
 def logUserOut(request):
