@@ -87,3 +87,7 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+# All javascript and styles thats not really important and based on bootstrap
+*.js
+*.css
