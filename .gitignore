@@ -91,3 +91,4 @@ ENV/
 # All javascript and styles thats not really important and based on bootstrap
 *.js
 *.css
+*.svg
